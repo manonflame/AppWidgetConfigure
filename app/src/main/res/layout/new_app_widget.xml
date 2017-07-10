@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/appWidget"
+    android:layout_width="300dp"
+    android:layout_height="150dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop ="15dp"
+    android:padding = "8dp"
+    android:gravity = "center"
+    >
+
+
+
+
+    <Button
+        android:id = "@+id/configure"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="C"
+         />
+
+    <Button
+        android:id = "@+id/refresh"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="R"/>
+
+
+
+</LinearLayout>
