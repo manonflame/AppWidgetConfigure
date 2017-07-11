@@ -7,9 +7,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import org.json.JSONArray;
@@ -23,6 +27,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -31,11 +36,29 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class NewAppWidget extends AppWidgetProvider {
 
+    static ArrayList<String> Ranking = new ArrayList<String>(){
+        {
+            add("1");
+            add("2");
+            add("3");
+            add("4");
+            add("5");
+
+            add("6");
+            add("7");
+            add("8");
+            add("9");
+            add("10");
+
+        }
+    };
+
+    ArrayList<String> newRanking;
 
 
     //API
-    //String TMONAPI = "https://api-qa.ticketmonster.co.kr/v2/widget/cards";
-    String TMONAPI = "https://raw.githubusercontent.com/ChoiJinYoung/iphonewithswift2/master/weather.json";
+    String TMONAPI = "https://api-qa.ticketmonster.co.kr/v2/widget/cards";
+   // String TMONAPI = "https://raw.githubusercontent.com/ChoiJinYoung/iphonewithswift2/master/weather.json";
 
     //URL 인스턴스 생성
     URL url = null;
@@ -45,8 +68,6 @@ public class NewAppWidget extends AppWidgetProvider {
     BufferedReader Res = null;
 
     JSONObject jObj = null;
-
-    JSONArray user = null;
 
     APITaker apiTaker = null;
 
@@ -62,7 +83,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+    void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
         System.out.println("updateAppWidget()");
@@ -77,24 +98,108 @@ public class NewAppWidget extends AppWidgetProvider {
         PendingIntent openConfig = PendingIntent.getActivity(context, 0, it, 0);
         views.setOnClickPendingIntent(R.id.configure, openConfig);
 
+        int a = 0;
+
+
+        int id[] = {R.id.fifthWeb, R.id.secondWeb, R.id.thirdWeb, R.id.fourthWeb, R.id.fifthWeb, R.id.sixthWeb, R.id.seventhWeb, R.id.eighthWeb, R.id.ninethWeb, R.id.tenthWeb};
+
+
+        System.out.println("after Config intent");
+        //API 출력
+        views.setTextViewText(R.id.firstWeb, Ranking.get(0));
+        views.setTextViewText(R.id.secondWeb, Ranking.get(1));
+        views.setTextViewText(R.id.thirdWeb, Ranking.get(2));
+        views.setTextViewText(R.id.fourthWeb, Ranking.get(3));
+        views.setTextViewText(R.id.fifthWeb, Ranking.get(4));
+
+        views.setTextViewText(R.id.sixthWeb, Ranking.get(5));
+        views.setTextViewText(R.id.seventhWeb, Ranking.get(6));
+        views.setTextViewText(R.id.eighthWeb, Ranking.get(7));
+        views.setTextViewText(R.id.ninethWeb, Ranking.get(8));
+        views.setTextViewText(R.id.tenthWeb, Ranking.get(9));
+
+        for(int i = 0 ; i < newRanking.size() ; i++){
+            System.out.println("LET'S CHECK OUT NEWRANKINGSIZE : " + i + "then Ranking : " + newRanking.get(i));
+            views.setTextViewText(id[i], newRanking.get(i));
+
+        }
+
+
+        System.out.println("after setTextViewText");
+
+
+
+        //TEXT VIEW - WEB VIEW 연결
+        //1st
+        Intent it1 = new Intent(context, WebActivity.class);
+        it1.setData(Uri.parse(Ranking.get(0)));
+        PendingIntent open1st = PendingIntent.getActivity(context, 0, it1, 0);
+        views.setOnClickPendingIntent(R.id.firstWeb, open1st);
+
+        //2nd
+        Intent it2 = new Intent(context, WebActivity.class);
+        it2.setData(Uri.parse(Ranking.get(1)));
+        PendingIntent open2nd = PendingIntent.getActivity(context, 0, it2, 0);
+        views.setOnClickPendingIntent(R.id.secondWeb, open2nd);
+
+        //3rd
+        Intent it3 = new Intent(context, WebActivity.class);
+        it3.setData(Uri.parse(Ranking.get(2)));
+        PendingIntent open3rd = PendingIntent.getActivity(context, 0, it3, 0);
+        views.setOnClickPendingIntent(R.id.thirdWeb, open3rd);
+
+        //4th
+        Intent it4 = new Intent(context, WebActivity.class);
+        it4.setData(Uri.parse(Ranking.get(3)));
+        PendingIntent open4th = PendingIntent.getActivity(context, 0, it4, 0);
+        views.setOnClickPendingIntent(R.id.fourthWeb, open4th);
+
+        //5th
+        Intent it5 = new Intent(context, WebActivity.class);
+        it5.setData(Uri.parse(Ranking.get(4)));
+        PendingIntent open5th = PendingIntent.getActivity(context, 0, it5, 0);
+        views.setOnClickPendingIntent(R.id.fifthWeb, open5th);
+
+        //6th
+        Intent it6 = new Intent(context, WebActivity.class);
+        it6.setData(Uri.parse(Ranking.get(5)));
+        PendingIntent open6th = PendingIntent.getActivity(context, 0, it6, 0);
+        views.setOnClickPendingIntent(R.id.sixthWeb, open6th);
+
+        //7th
+        Intent it7 = new Intent(context, WebActivity.class);
+        it7.setData(Uri.parse(Ranking.get(6)));
+        PendingIntent open7th = PendingIntent.getActivity(context, 0, it7, 0);
+        views.setOnClickPendingIntent(R.id.seventhWeb, open7th);
+
+        //8th
+        Intent it8 = new Intent(context, WebActivity.class);
+        it8.setData(Uri.parse(Ranking.get(7)));
+        PendingIntent open8th = PendingIntent.getActivity(context, 0, it8, 0);
+        views.setOnClickPendingIntent(R.id.eighthWeb, open8th);
+
+
+        //9th
+        Intent it9 = new Intent(context, WebActivity.class);
+        it9.setData(Uri.parse(Ranking.get(8)));
+        PendingIntent open9th = PendingIntent.getActivity(context, 0, it9, 0);
+        views.setOnClickPendingIntent(R.id.ninethWeb, open9th);
+
+
+        //10th
+        Intent it10 = new Intent(context, WebActivity.class);
+        it10.setData(Uri.parse(Ranking.get(9)));
+        PendingIntent open10th = PendingIntent.getActivity(context, 0, it10, 0);
+        views.setOnClickPendingIntent(R.id.tenthWeb, open10th);
 
 
 
         //투명도 설정
         //싴바 프레퍼런시스에서 데이터 가져오고
-        int test = PreferenceManager.getDefaultSharedPreferences(context).getInt("degreeOfTransparency", 0);
-        System.out.println("SeekValue received : " + test);
+        int alpha = PreferenceManager.getDefaultSharedPreferences(context).getInt("degreeOfTransparency", 0);
+        System.out.println("SeekValue received : " + alpha);
         //투명도 설정
-        views.setInt(R.id.appWidget, "setBackgroundColor", Color.argb(test*2,22,22,22));
-
-
-
-
-        //api받기
-
-
-
-
+        views.setInt(R.id.appWidget, "setBackgroundColor", Color.argb(alpha*2,225,225,225));
 
 
         // Instruct the widget manager to update the widget
@@ -109,23 +214,13 @@ public class NewAppWidget extends AppWidgetProvider {
         this.context = context;
 
 
+        apiTaker = new APITaker(appWidgetManager, appWidgetIds);
+        apiTaker.execute();
         //반복이 계속 일어나는 이유
         System.out.println("The length of appWidgetIds : " + appWidgetIds.length);
 
+
         // There may be multiple widgets active, so update all of hem
-        for (int appWidgetId : appWidgetIds) {
-
-            System.out.println("for state in onUpdate()");
-
-
-
-            apiTaker = new APITaker();
-            apiTaker.execute();
-
-
-            updateAppWidget(context, appWidgetManager, appWidgetId);
-
-        }
 
 
     }
@@ -173,11 +268,28 @@ public class NewAppWidget extends AppWidgetProvider {
     //API를 파싱 후 전역 ArrayList<String>에 적용할 것이라 리턴값 없음
     public class APITaker extends AsyncTask<Void, Void, Void> {
 
+        AppWidgetManager appWidgetManager;
+        int[] appWidgetIds;
+
+        //**이거 되는지 확인
+        RemoteViews rViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+
+
+        public APITaker(AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+            this.appWidgetManager = appWidgetManager;
+            this.appWidgetIds = appWidgetIds;
+        }
+
         //API 받기 전에 progressBar처리
         @Override
         protected void onPreExecute(){
+
+
             super.onPreExecute();
 
+            //**
+            rViews.setViewVisibility(R.id.ProgressBar, View.VISIBLE);
+            rViews.setViewVisibility(R.id.ranking, View.INVISIBLE);
 
 
 
@@ -186,7 +298,8 @@ public class NewAppWidget extends AppWidgetProvider {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            InputStream is = null;
+
+            newRanking = new ArrayList<String>();
 
             System.out.println("doInBackground()");
 
@@ -204,14 +317,12 @@ public class NewAppWidget extends AppWidgetProvider {
                 url = new URL(TMONAPI);
                 conn=(HttpsURLConnection) url.openConnection();
 
-                //설정은 다 default로 둘거니까 일단 생략해보자
-                conn.setRequestProperty("User-Agent","my-rest-app-v0.1");
-                conn.setRequestProperty("Accept","application/vnd.github.v3+json");
-                conn.setRequestProperty("Contact-Me", "hathibelagal@example.com");
+
 
                 System.out.println("doInBackground() :: after openConnection() ");
 
-                is = conn.getInputStream();
+
+                Log.e("code",conn.getResponseCode()+"");
 
                 System.out.println("after conn.getInputStream() ");
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
@@ -222,7 +333,6 @@ public class NewAppWidget extends AppWidgetProvider {
                 }
                 System.out.println(" Before access to conn ");
                 Res = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                //Res = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
                 System.out.println("doInBackground() :: after BufferedReader construct() ");
                 while((line = Res.readLine())!=null){
@@ -248,22 +358,19 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
             try{
-
-
-                //뭐 대강 이런 식으로요
                 jObj = new JSONObject(rJson);
-                JSONObject rjObj = jObj.getJSONObject("weatherinfo");
 
+                JSONArray jArr = jObj.getJSONArray("data");
 
-                JSONArray jArr = rjObj.getJSONArray("local");
 
 
                 for(int i = 0 ; i < jArr.length() ; i++){
                     jObj = jArr.getJSONObject(i);
-                    String country = jObj.getString("country");
-                    String weather = jObj.getString("weather");
+                    String title = jObj.getString("title");
 
-                    System.out.println("country : "+country +" - weather : " + weather );
+                    Ranking.set(i,title);
+                    newRanking.add(i,title);
+                    System.out.println("title renew : " + Ranking.get(i));
 
                 }
 
@@ -287,6 +394,19 @@ public class NewAppWidget extends AppWidgetProvider {
         @Override
         protected void onPostExecute(Void v){
             super.onPostExecute(v);
+
+            for (int appWidgetId : appWidgetIds) {
+
+                System.out.println("for state in onUpdate()");
+
+                //**
+                rViews.setViewVisibility(R.id.ProgressBar, View.GONE);
+                rViews.setViewVisibility(R.id.ranking, View.VISIBLE);
+
+                updateAppWidget(context, appWidgetManager, appWidgetId);
+
+            }
+
 
         }
     }
