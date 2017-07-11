@@ -90,6 +90,8 @@ public class NewAppWidget extends AppWidgetProvider {
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
+        views.setViewVisibility(R.id.getAPIprogress, View.GONE);
+        views.setViewVisibility(R.id.ranking, View.VISIBLE);
 
         //버튼에 이벤트 부여
 
@@ -98,30 +100,33 @@ public class NewAppWidget extends AppWidgetProvider {
         PendingIntent openConfig = PendingIntent.getActivity(context, 0, it, 0);
         views.setOnClickPendingIntent(R.id.configure, openConfig);
 
-        int a = 0;
 
 
-        int id[] = {R.id.fifthWeb, R.id.secondWeb, R.id.thirdWeb, R.id.fourthWeb, R.id.fifthWeb, R.id.sixthWeb, R.id.seventhWeb, R.id.eighthWeb, R.id.ninethWeb, R.id.tenthWeb};
+
+        int id[] = {R.id.firstWeb, R.id.secondWeb, R.id.thirdWeb, R.id.fourthWeb, R.id.fifthWeb, R.id.sixthWeb, R.id.seventhWeb, R.id.eighthWeb, R.id.ninethWeb, R.id.tenthWeb};
 
 
         System.out.println("after Config intent");
-        //API 출력
-        views.setTextViewText(R.id.firstWeb, Ranking.get(0));
-        views.setTextViewText(R.id.secondWeb, Ranking.get(1));
-        views.setTextViewText(R.id.thirdWeb, Ranking.get(2));
-        views.setTextViewText(R.id.fourthWeb, Ranking.get(3));
-        views.setTextViewText(R.id.fifthWeb, Ranking.get(4));
-
-        views.setTextViewText(R.id.sixthWeb, Ranking.get(5));
-        views.setTextViewText(R.id.seventhWeb, Ranking.get(6));
-        views.setTextViewText(R.id.eighthWeb, Ranking.get(7));
-        views.setTextViewText(R.id.ninethWeb, Ranking.get(8));
-        views.setTextViewText(R.id.tenthWeb, Ranking.get(9));
+//        //API 출력
+//        views.setTextViewText(R.id.firstWeb, Ranking.get(0));
+//        views.setTextViewText(R.id.secondWeb, Ranking.get(1));
+//        views.setTextViewText(R.id.thirdWeb, Ranking.get(2));
+//        views.setTextViewText(R.id.fourthWeb, Ranking.get(3));
+//        views.setTextViewText(R.id.fifthWeb, Ranking.get(4));
+//
+//        views.setTextViewText(R.id.sixthWeb, Ranking.get(5));
+//        views.setTextViewText(R.id.seventhWeb, Ranking.get(6));
+//        views.setTextViewText(R.id.eighthWeb, Ranking.get(7));
+//        views.setTextViewText(R.id.ninethWeb, Ranking.get(8));
+//        views.setTextViewText(R.id.tenthWeb, Ranking.get(9));
 
         for(int i = 0 ; i < newRanking.size() ; i++){
             System.out.println("LET'S CHECK OUT NEWRANKINGSIZE : " + i + "then Ranking : " + newRanking.get(i));
             views.setTextViewText(id[i], newRanking.get(i));
 
+        }
+        for(int i = newRanking.size() ; i < 10 ; i++ ){
+            views.setTextViewText(id[i], " ");
         }
 
 
@@ -129,68 +134,256 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
 
-        //TEXT VIEW - WEB VIEW 연결
-        //1st
+
+
         Intent it1 = new Intent(context, WebActivity.class);
-        it1.setData(Uri.parse(Ranking.get(0)));
-        PendingIntent open1st = PendingIntent.getActivity(context, 0, it1, 0);
-        views.setOnClickPendingIntent(R.id.firstWeb, open1st);
+//        it1.setData(Uri.parse(Ranking.get(0)));
+//        PendingIntent open1st = PendingIntent.getActivity(context, 0, it1, 0);
+//        views.setOnClickPendingIntent(R.id.firstWeb, open1st);
 
         //2nd
         Intent it2 = new Intent(context, WebActivity.class);
-        it2.setData(Uri.parse(Ranking.get(1)));
-        PendingIntent open2nd = PendingIntent.getActivity(context, 0, it2, 0);
-        views.setOnClickPendingIntent(R.id.secondWeb, open2nd);
+//        it2.setData(Uri.parse(Ranking.get(1)));
+//        PendingIntent open2nd = PendingIntent.getActivity(context, 0, it2, 0);
+//        views.setOnClickPendingIntent(R.id.secondWeb, open2nd);
 
         //3rd
         Intent it3 = new Intent(context, WebActivity.class);
-        it3.setData(Uri.parse(Ranking.get(2)));
-        PendingIntent open3rd = PendingIntent.getActivity(context, 0, it3, 0);
-        views.setOnClickPendingIntent(R.id.thirdWeb, open3rd);
+//        it3.setData(Uri.parse(Ranking.get(2)));
+//        PendingIntent open3rd = PendingIntent.getActivity(context, 0, it3, 0);
+//        views.setOnClickPendingIntent(R.id.thirdWeb, open3rd);
+
+
+
+        System.out.println("CHECK POINT 3");
 
         //4th
         Intent it4 = new Intent(context, WebActivity.class);
-        it4.setData(Uri.parse(Ranking.get(3)));
-        PendingIntent open4th = PendingIntent.getActivity(context, 0, it4, 0);
-        views.setOnClickPendingIntent(R.id.fourthWeb, open4th);
+//        it4.setData(Uri.parse(Ranking.get(3)));
+//        PendingIntent open4th = PendingIntent.getActivity(context, 0, it4, 0);
+//        views.setOnClickPendingIntent(R.id.fourthWeb, open4th);
+
+        System.out.println("CHECK POINT 4");
 
         //5th
         Intent it5 = new Intent(context, WebActivity.class);
-        it5.setData(Uri.parse(Ranking.get(4)));
-        PendingIntent open5th = PendingIntent.getActivity(context, 0, it5, 0);
-        views.setOnClickPendingIntent(R.id.fifthWeb, open5th);
+//        it5.setData(Uri.parse(Ranking.get(4)));
+//        PendingIntent open5th = PendingIntent.getActivity(context, 0, it5, 0);
+//        views.setOnClickPendingIntent(R.id.fifthWeb, open5th);
 
+
+        System.out.println("CHECK POINT 5");
         //6th
         Intent it6 = new Intent(context, WebActivity.class);
-        it6.setData(Uri.parse(Ranking.get(5)));
-        PendingIntent open6th = PendingIntent.getActivity(context, 0, it6, 0);
-        views.setOnClickPendingIntent(R.id.sixthWeb, open6th);
+//        it6.setData(Uri.parse(Ranking.get(5)));
+//        PendingIntent open6th = PendingIntent.getActivity(context, 0, it6, 0);
+//        views.setOnClickPendingIntent(R.id.sixthWeb, open6th);
 
+
+        System.out.println("CHECK POINT 6");
         //7th
         Intent it7 = new Intent(context, WebActivity.class);
-        it7.setData(Uri.parse(Ranking.get(6)));
-        PendingIntent open7th = PendingIntent.getActivity(context, 0, it7, 0);
-        views.setOnClickPendingIntent(R.id.seventhWeb, open7th);
+//        it7.setData(Uri.parse(Ranking.get(6)));
+//        PendingIntent open7th = PendingIntent.getActivity(context, 0, it7, 0);
+//        views.setOnClickPendingIntent(R.id.seventhWeb, open7th);
 
+
+
+        System.out.println("CHECK POINT 7");
         //8th
         Intent it8 = new Intent(context, WebActivity.class);
-        it8.setData(Uri.parse(Ranking.get(7)));
-        PendingIntent open8th = PendingIntent.getActivity(context, 0, it8, 0);
-        views.setOnClickPendingIntent(R.id.eighthWeb, open8th);
+//        it8.setData(Uri.parse(Ranking.get(7)));
+//        PendingIntent open8th = PendingIntent.getActivity(context, 0, it8, 0);
+//        views.setOnClickPendingIntent(R.id.eighthWeb, open8th);
 
-
+        System.out.println("CHECK POINT 8");
         //9th
         Intent it9 = new Intent(context, WebActivity.class);
-        it9.setData(Uri.parse(Ranking.get(8)));
-        PendingIntent open9th = PendingIntent.getActivity(context, 0, it9, 0);
-        views.setOnClickPendingIntent(R.id.ninethWeb, open9th);
+//        it9.setData(Uri.parse(Ranking.get(8)));
+//        PendingIntent open9th = PendingIntent.getActivity(context, 0, it9, 0);
+//        views.setOnClickPendingIntent(R.id.ninethWeb, open9th);
 
-
+        System.out.println("CHECK POINT 9");
         //10th
         Intent it10 = new Intent(context, WebActivity.class);
-        it10.setData(Uri.parse(Ranking.get(9)));
-        PendingIntent open10th = PendingIntent.getActivity(context, 0, it10, 0);
-        views.setOnClickPendingIntent(R.id.tenthWeb, open10th);
+//        it10.setData(Uri.parse(Ranking.get(9)));
+//        PendingIntent open10th = PendingIntent.getActivity(context, 0, it10, 0);
+//        views.setOnClickPendingIntent(R.id.tenthWeb, open10th);
+
+        System.out.println("CHECK POINT 10");
+
+
+
+
+        Intent intentArray[] = {
+                it1, it2, it3, it4, it5, it6, it7, it8, it9, it10
+        };
+
+        PendingIntent pit1 = null;
+        PendingIntent pit2 = null;
+        PendingIntent pit3 = null;
+        PendingIntent pit4 = null;
+        PendingIntent pit5 = null;
+        PendingIntent pit6 = null;
+        PendingIntent pit7 = null;
+        PendingIntent pit8 = null;
+        PendingIntent pit9 = null;
+        PendingIntent pit10 = null;
+
+
+
+        PendingIntent pItArr[] = {
+                pit1, pit2, pit3, pit4, pit5, pit6, pit7, pit8, pit9, pit10
+        };
+
+        for(int i = 0 ; i < newRanking.size(); i++){
+            System.out.println("=====================================");
+            System.out.println("this is for state : " + i );
+            System.out.println("size of intentArray : " + intentArray.length );
+            System.out.println("size of pendingIntentArray : " + pItArr.length );
+            System.out.println("newRanking.get("+i+") : " + newRanking.size());
+            System.out.println("=====================================");
+            intentArray[i].setData(Uri.parse(newRanking.get(i)));
+            pItArr[i] = PendingIntent.getActivity(context, 0, intentArray[i], 0);
+            views.setOnClickPendingIntent(id[i], pItArr[i]);
+        }
+
+        //TEXT VIEW - WEB VIEW 연결
+
+
+
+//        //1st
+//        if(newRanking.size()>=1){
+//            Intent it1 = new Intent(context, WebActivity.class);
+//            it1.setData(Uri.parse(Ranking.get(0)));
+//            PendingIntent open1st = PendingIntent.getActivity(context, 0, it1, 0);
+//            views.setOnClickPendingIntent(R.id.firstWeb, open1st);
+//        }
+//
+//
+//        //2nd
+//        Intent it2 = new Intent(context, WebActivity.class);
+//        it2.setData(Uri.parse(Ranking.get(1)));
+//        PendingIntent open2nd = PendingIntent.getActivity(context, 0, it2, 0);
+//        views.setOnClickPendingIntent(R.id.secondWeb, open2nd);
+//
+//        //3rd
+//        Intent it3 = new Intent(context, WebActivity.class);
+//        it3.setData(Uri.parse(Ranking.get(2)));
+//        PendingIntent open3rd = PendingIntent.getActivity(context, 0, it3, 0);
+//        views.setOnClickPendingIntent(R.id.thirdWeb, open3rd);
+//
+//        //4th
+//        Intent it4 = new Intent(context, WebActivity.class);
+//        it4.setData(Uri.parse(Ranking.get(3)));
+//        PendingIntent open4th = PendingIntent.getActivity(context, 0, it4, 0);
+//        views.setOnClickPendingIntent(R.id.fourthWeb, open4th);
+//
+//        //5th
+//        Intent it5 = new Intent(context, WebActivity.class);
+//        it5.setData(Uri.parse(Ranking.get(4)));
+//        PendingIntent open5th = PendingIntent.getActivity(context, 0, it5, 0);
+//        views.setOnClickPendingIntent(R.id.fifthWeb, open5th);
+//
+//        //6th
+//        Intent it6 = new Intent(context, WebActivity.class);
+//        it6.setData(Uri.parse(Ranking.get(5)));
+//        PendingIntent open6th = PendingIntent.getActivity(context, 0, it6, 0);
+//        views.setOnClickPendingIntent(R.id.sixthWeb, open6th);
+//
+//        //7th
+//        Intent it7 = new Intent(context, WebActivity.class);
+//        it7.setData(Uri.parse(Ranking.get(6)));
+//        PendingIntent open7th = PendingIntent.getActivity(context, 0, it7, 0);
+//        views.setOnClickPendingIntent(R.id.seventhWeb, open7th);
+//
+//        //8th
+//        Intent it8 = new Intent(context, WebActivity.class);
+//        it8.setData(Uri.parse(Ranking.get(7)));
+//        PendingIntent open8th = PendingIntent.getActivity(context, 0, it8, 0);
+//        views.setOnClickPendingIntent(R.id.eighthWeb, open8th);
+//
+//
+//        //9th
+//        Intent it9 = new Intent(context, WebActivity.class);
+//        it9.setData(Uri.parse(Ranking.get(8)));
+//        PendingIntent open9th = PendingIntent.getActivity(context, 0, it9, 0);
+//        views.setOnClickPendingIntent(R.id.ninethWeb, open9th);
+//
+//
+//        //10th
+//        Intent it10 = new Intent(context, WebActivity.class);
+//        it10.setData(Uri.parse(Ranking.get(9)));
+//        PendingIntent open10th = PendingIntent.getActivity(context, 0, it10, 0);
+//        views.setOnClickPendingIntent(R.id.tenthWeb, open10th);
+
+
+
+
+
+
+//        //TEXT VIEW - WEB VIEW 연결
+//        //1st
+//        Intent it1 = new Intent(context, WebActivity.class);
+//        it1.setData(Uri.parse(Ranking.get(0)));
+//        PendingIntent open1st = PendingIntent.getActivity(context, 0, it1, 0);
+//        views.setOnClickPendingIntent(R.id.firstWeb, open1st);
+//
+//        //2nd
+//        Intent it2 = new Intent(context, WebActivity.class);
+//        it2.setData(Uri.parse(Ranking.get(1)));
+//        PendingIntent open2nd = PendingIntent.getActivity(context, 0, it2, 0);
+//        views.setOnClickPendingIntent(R.id.secondWeb, open2nd);
+//
+//        //3rd
+//        Intent it3 = new Intent(context, WebActivity.class);
+//        it3.setData(Uri.parse(Ranking.get(2)));
+//        PendingIntent open3rd = PendingIntent.getActivity(context, 0, it3, 0);
+//        views.setOnClickPendingIntent(R.id.thirdWeb, open3rd);
+//
+//        //4th
+//        Intent it4 = new Intent(context, WebActivity.class);
+//        it4.setData(Uri.parse(Ranking.get(3)));
+//        PendingIntent open4th = PendingIntent.getActivity(context, 0, it4, 0);
+//        views.setOnClickPendingIntent(R.id.fourthWeb, open4th);
+//
+//        //5th
+//        Intent it5 = new Intent(context, WebActivity.class);
+//        it5.setData(Uri.parse(Ranking.get(4)));
+//        PendingIntent open5th = PendingIntent.getActivity(context, 0, it5, 0);
+//        views.setOnClickPendingIntent(R.id.fifthWeb, open5th);
+//
+//        //6th
+//        Intent it6 = new Intent(context, WebActivity.class);
+//        it6.setData(Uri.parse(Ranking.get(5)));
+//        PendingIntent open6th = PendingIntent.getActivity(context, 0, it6, 0);
+//        views.setOnClickPendingIntent(R.id.sixthWeb, open6th);
+//
+//        //7th
+//        Intent it7 = new Intent(context, WebActivity.class);
+//        it7.setData(Uri.parse(Ranking.get(6)));
+//        PendingIntent open7th = PendingIntent.getActivity(context, 0, it7, 0);
+//        views.setOnClickPendingIntent(R.id.seventhWeb, open7th);
+//
+//        //8th
+//        Intent it8 = new Intent(context, WebActivity.class);
+//        it8.setData(Uri.parse(Ranking.get(7)));
+//        PendingIntent open8th = PendingIntent.getActivity(context, 0, it8, 0);
+//        views.setOnClickPendingIntent(R.id.eighthWeb, open8th);
+//
+//
+//        //9th
+//        Intent it9 = new Intent(context, WebActivity.class);
+//        it9.setData(Uri.parse(Ranking.get(8)));
+//        PendingIntent open9th = PendingIntent.getActivity(context, 0, it9, 0);
+//        views.setOnClickPendingIntent(R.id.ninethWeb, open9th);
+//
+//
+//        //10th
+//        Intent it10 = new Intent(context, WebActivity.class);
+//        it10.setData(Uri.parse(Ranking.get(9)));
+//        PendingIntent open10th = PendingIntent.getActivity(context, 0, it10, 0);
+//        views.setOnClickPendingIntent(R.id.tenthWeb, open10th);
 
 
 
@@ -288,7 +481,7 @@ public class NewAppWidget extends AppWidgetProvider {
             super.onPreExecute();
 
             //**
-            rViews.setViewVisibility(R.id.ProgressBar, View.VISIBLE);
+            rViews.setViewVisibility(R.id.getAPIprogress, View.VISIBLE);
             rViews.setViewVisibility(R.id.ranking, View.INVISIBLE);
 
 
@@ -400,8 +593,7 @@ public class NewAppWidget extends AppWidgetProvider {
                 System.out.println("for state in onUpdate()");
 
                 //**
-                rViews.setViewVisibility(R.id.ProgressBar, View.GONE);
-                rViews.setViewVisibility(R.id.ranking, View.VISIBLE);
+
 
                 updateAppWidget(context, appWidgetManager, appWidgetId);
 
