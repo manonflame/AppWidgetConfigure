@@ -591,12 +591,7 @@ public class NewAppWidget extends AppWidgetProvider {
             for (int appWidgetId : appWidgetIds) {
 
                 System.out.println("for state in onUpdate()");
-
-                //**
-
-
                 updateAppWidget(context, appWidgetManager, appWidgetId);
-
             }
 
 

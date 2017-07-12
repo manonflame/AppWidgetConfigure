@@ -1,15 +1,23 @@
 package com.example.kyungjunmin.appwidgetconfigure;
 
+import android.app.WallpaperInfo;
+import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -35,10 +43,16 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
     Context context;
 
 
+
+    int initAlpha;
     //시크바 선언
     SeekBar mSeek;
     //시크바 값을 텍스트로 표현
     TextView mTxt;
+
+
+
+    LinearLayout sampleAlpha;
 
 
 
@@ -58,18 +72,22 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
 
     JSONArray user = null;
 
-    //10개의 검색어 키워드를 받을 ArrayList<String>
-
-
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_app_widget_config);
 
         System.out.println("Configure Activity : onCreate()");
+
+        ImageView imgView = (ImageView)findViewById(R.id.configBackground);
+        imgView.setImageDrawable(WallpaperManager.getInstance(this).getDrawable());
+
+
 
 
 
@@ -78,15 +96,41 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
 
 
         //싴바 연결
-        mSeek = ((SeekBar) findViewById(R.id.configSeekBar));
+        mSeek = (SeekBar) findViewById(R.id.configSeekBar);
+
+
+
+        sampleAlpha =  (LinearLayout) findViewById(R.id.sampleAlpha);
 
         //시크바 초기값 꺼내오기
-        int test = PreferenceManager.getDefaultSharedPreferences(this).getInt("degreeOfTransparency", 0);
-        mSeek.setProgress(test);
+        initAlpha = PreferenceManager.getDefaultSharedPreferences(this).getInt("degreeOfTransparency", 0);
+        mSeek.setProgress(initAlpha);
+        sampleAlpha.setBackgroundColor(Color.argb(initAlpha*2, 255, 255, 255));
 
         //싴바의 값을 보여주는 텍스트뷰도 프리퍼런스에서 가져와서 설정함
-        String convertedText = String.valueOf(test);
+        String convertedText = String.valueOf(initAlpha);
         mTxt.setText(convertedText);
+
+
+        mSeek.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+                int padding = mSeek.getPaddingLeft() + mSeek.getPaddingRight();
+                int sPos = mSeek.getLeft() + mSeek.getPaddingLeft();
+                int xPos = (mSeek.getWidth() - padding)*initAlpha/mSeek.getMax() + sPos - (mTxt.getWidth()/2);
+                int width = mSeek.getWidth();
+                int max = mSeek.getMax();
+                System.out.println("asdf : " + initAlpha);
+                System.out.println("asdf : " + mSeek.getWidth());
+                System.out.println("asdf : " + padding);
+                System.out.println("asdf : " + mSeek.getMax());
+                System.out.println("asdf : " + mSeek.getWidth()/2);
+
+                mTxt.setX(xPos);
+            }
+        });
+
+
 
 
         Intent intent = getIntent();
@@ -110,10 +154,26 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
 
         mSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
 
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String convertedText = String.valueOf(progress);
+
+                int alpha = progress;
                 mTxt.setText(convertedText);
+
+                int padding = seekBar.getPaddingLeft() + seekBar.getPaddingRight();
+                int sPos = seekBar.getLeft() + seekBar.getPaddingLeft();
+                int xPos = (seekBar.getWidth() - padding)*seekBar.getProgress()/seekBar.getMax() + sPos - (mTxt.getWidth()/2);
+                System.out.println("zxcv : " + seekBar.getProgress());
+                System.out.println("zxcv : " + seekBar.getWidth());
+                System.out.println("zxcv : " + padding);
+                System.out.println("zxcv : " + seekBar.getMax());
+                System.out.println("zxcv : " + seekBar.getWidth()/2);
+
+                mTxt.setX(xPos);
+
+                sampleAlpha.setBackgroundColor(Color.argb(alpha*2, 255, 255, 255));
             }
 
             @Override
@@ -186,76 +246,6 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
 
         System.out.println("확인 or 취소 마지막 처리 확인");
         finish();
-    }
-
-
-
-    //API를 파싱 후 전역 ArrayList<String>에 적용할 것이라 리턴값 없음
-    private class APITaker extends AsyncTask<Void, Void, Void> {
-
-        //API 받기 전에 progressBar처리
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-
-
-
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-
-            StringBuilder json = null;
-
-            String line = null;
-
-            String rJson = null;
-
-            json = new StringBuilder();
-            try{
-                url = new URL(TMONAPI);
-                conn=(HttpURLConnection) url.openConnection();
-                conn.setDoOutput(true);
-                //설정은 다 default로 둘거니까 일단 생략해보자
-
-                Res = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                while((line = Res.readLine())!=null){
-                    json.append(line);
-                }
-                conn.disconnect();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            rJson = json.toString();
-            System.out.println(rJson);
-
-            try{
-                jObj = new JSONObject(rJson);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-
-
-
-
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void v){
-            super.onPostExecute(v);
-
-        }
     }
 
 }

@@ -4,32 +4,198 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kyungjunmin.appwidgetconfigure.AppWidgetConfigActivity">
+    tools:context="com.example.kyungjunmin.appwidgetconfigure.AppWidgetConfigActivity"
+    android:orientation="vertical">
 
 
-    <SeekBar
-        android:id = "@+id/configSeekBar"
-        android:layout_width="200dp"
-        android:layout_height="50dp" />
-
-    <Button
-        android:id="@+id/confirm"
-        android:text ="Y"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-
-    <Button
-        android:id="@+id/cancel"
-        android:text="N"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
 
-    <TextView
-        android:id="@+id/SeekBarText"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="#FFFF10"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="56dp"
+            android:layout_marginBottom="220dp">
+
+
+
+            <ImageView
+                android:id="@+id/configBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/sampleAlpha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                >
+                <include
+                    layout="@layout/new_app_widget"
+                    />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#FFF">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="위젯 설정"
+                android:textColor="#000"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_alignParentBottom="true"
+            android:background="#FFF"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="24.5dp"
+                    android:layout_marginLeft="22dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13.5dp"
+                    android:text="위젯 투명도"
+                    android:textColor="#000"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <TextView
+                            android:id="@+id/SeekBarText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <SeekBar
+                            android:id="@+id/configSeekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="0dp"
+                            />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="21.5dp"
+                    android:layout_marginRight="21.5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:layout_alignParentLeft="true"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_alignParentRight="true"
+                        />
+
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="2dp"
+                        android:text="취소"
+                        android:layout_alignParentLeft="true"
+                        android:layout_weight="1"
+                        android:background="@drawable/button"
+                        />
+
+                    <Button
+                        android:id="@+id/confirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="2dp"
+                        android:text="확인"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="1"
+                        android:background="#fa5a44"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 
 </LinearLayout>
