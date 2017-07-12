@@ -106,7 +106,8 @@
                             android:id="@+id/SeekBarText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text=" "
+                            android:textColor="#000"
                             />
 
                     </LinearLayout>
@@ -118,7 +119,8 @@
                             android:id="@+id/configSeekBar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="0dp"
+                            android:progressDrawable="@drawable/seekbar_progress"
+                            android:thumb="@drawable/seekbar_thumb"
                             />
 
                     </LinearLayout>
@@ -140,6 +142,7 @@
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:layout_alignParentLeft="true"
+                        android:textColor="#000"
                         />
 
                     <TextView
@@ -147,6 +150,7 @@
                         android:layout_height="wrap_content"
                         android:text="100"
                         android:layout_alignParentRight="true"
+                        android:textColor="#000"
                         />
 
                 </RelativeLayout>
@@ -166,6 +170,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_weight="1"
                         android:background="@drawable/button"
+                        android:textColor="#fa5a44"
                         />
 
                     <Button
@@ -178,6 +183,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_weight="1"
                         android:background="#fa5a44"
+                        android:textColor="#FFF"
                         />
 
                 </LinearLayout>

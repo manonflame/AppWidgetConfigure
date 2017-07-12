@@ -55,7 +55,7 @@
                         android:layout_width="15dp"
                         android:layout_height="17dp"
                         android:layout_marginRight="5dp"
-                        android:background="@mipmap/ic_launcher"
+                        android:background="@mipmap/ic_setting"
 
                         />
 
@@ -63,7 +63,7 @@
                         android:id="@+id/refresh"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:background="@android:drawable/stat_notify_sync_noanim"
+                        android:background="@mipmap/ic_refresh"
 
                         />
 
@@ -130,7 +130,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="샤오미 공기청정기" />
+                        android:text="샤오미 공기청정기"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"
+                        />
 
 
                 </LinearLayout>
@@ -162,7 +166,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="방수팩" />
+                        android:text="방수팩"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"/>
 
 
                 </LinearLayout>
@@ -193,7 +200,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="린넨셔츠" />
+                        android:text="린넨셔츠"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"/>
 
 
                 </LinearLayout>
@@ -218,14 +228,18 @@
                         android:fontFamily="sans-serif"
                         android:text="7"
                         android:textColor="#959da6"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        />
 
                     <TextView
                         android:id="@+id/seventhWeb"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="항공권" />
+                        android:text="항공권"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"/>
 
 
                 </LinearLayout>
@@ -256,7 +270,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="꿀딜" />
+                        android:text="꿀딜"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"/>
 
 
                 </LinearLayout>
@@ -288,7 +305,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="주유패스" />
+                        android:text="주유패스"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"/>
 
 
                 </LinearLayout>
@@ -319,7 +339,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="맥북프로" />
+                        android:text="맥북프로"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"/>
 
 
                 </LinearLayout>
@@ -344,14 +367,18 @@
                         android:fontFamily="sans-serif"
                         android:text="9"
                         android:textColor="#959da6"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        />
 
                     <TextView
                         android:id="@+id/ninethWeb"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="생수" />
+                        android:text="생수"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"/>
 
 
                 </LinearLayout>
@@ -383,7 +410,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="휴대용선풍기" />
+                        android:text="휴대용선풍기"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"/>
 
 
                 </LinearLayout>
@@ -415,7 +445,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginLeft="7dp"
-                        android:text="슈퍼마트" />
+                        android:text="슈퍼마트"
+                        android:textSize="13dp"
+                        android:textColor="#5a5f68"
+                        android:letterSpacing="-0.07"/>
 
 
                 </LinearLayout>

@@ -90,8 +90,19 @@ public class NewAppWidget extends AppWidgetProvider {
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
+        //ASDF
         views.setViewVisibility(R.id.getAPIprogress, View.GONE);
         views.setViewVisibility(R.id.ranking, View.VISIBLE);
+
+
+
+        //리프레시 이벤트
+        Intent refresh = new Intent("android.appwidget.action.APPWIDGET_REFRESH");
+        PendingIntent pRefresh = PendingIntent.getBroadcast(context, 0, refresh, 0);
+        views.setOnClickPendingIntent(R.id.refresh, pRefresh);
+
+
+
 
         //버튼에 이벤트 부여
 
@@ -107,18 +118,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
         System.out.println("after Config intent");
-//        //API 출력
-//        views.setTextViewText(R.id.firstWeb, Ranking.get(0));
-//        views.setTextViewText(R.id.secondWeb, Ranking.get(1));
-//        views.setTextViewText(R.id.thirdWeb, Ranking.get(2));
-//        views.setTextViewText(R.id.fourthWeb, Ranking.get(3));
-//        views.setTextViewText(R.id.fifthWeb, Ranking.get(4));
-//
-//        views.setTextViewText(R.id.sixthWeb, Ranking.get(5));
-//        views.setTextViewText(R.id.seventhWeb, Ranking.get(6));
-//        views.setTextViewText(R.id.eighthWeb, Ranking.get(7));
-//        views.setTextViewText(R.id.ninethWeb, Ranking.get(8));
-//        views.setTextViewText(R.id.tenthWeb, Ranking.get(9));
+
 
         for(int i = 0 ; i < newRanking.size() ; i++){
             System.out.println("LET'S CHECK OUT NEWRANKINGSIZE : " + i + "then Ranking : " + newRanking.get(i));
@@ -135,23 +135,16 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
 
-
+        //1st
         Intent it1 = new Intent(context, WebActivity.class);
-//        it1.setData(Uri.parse(Ranking.get(0)));
-//        PendingIntent open1st = PendingIntent.getActivity(context, 0, it1, 0);
-//        views.setOnClickPendingIntent(R.id.firstWeb, open1st);
+
 
         //2nd
         Intent it2 = new Intent(context, WebActivity.class);
-//        it2.setData(Uri.parse(Ranking.get(1)));
-//        PendingIntent open2nd = PendingIntent.getActivity(context, 0, it2, 0);
-//        views.setOnClickPendingIntent(R.id.secondWeb, open2nd);
+
 
         //3rd
         Intent it3 = new Intent(context, WebActivity.class);
-//        it3.setData(Uri.parse(Ranking.get(2)));
-//        PendingIntent open3rd = PendingIntent.getActivity(context, 0, it3, 0);
-//        views.setOnClickPendingIntent(R.id.thirdWeb, open3rd);
 
 
 
@@ -159,56 +152,40 @@ public class NewAppWidget extends AppWidgetProvider {
 
         //4th
         Intent it4 = new Intent(context, WebActivity.class);
-//        it4.setData(Uri.parse(Ranking.get(3)));
-//        PendingIntent open4th = PendingIntent.getActivity(context, 0, it4, 0);
-//        views.setOnClickPendingIntent(R.id.fourthWeb, open4th);
+
 
         System.out.println("CHECK POINT 4");
 
         //5th
         Intent it5 = new Intent(context, WebActivity.class);
-//        it5.setData(Uri.parse(Ranking.get(4)));
-//        PendingIntent open5th = PendingIntent.getActivity(context, 0, it5, 0);
-//        views.setOnClickPendingIntent(R.id.fifthWeb, open5th);
 
 
         System.out.println("CHECK POINT 5");
         //6th
         Intent it6 = new Intent(context, WebActivity.class);
-//        it6.setData(Uri.parse(Ranking.get(5)));
-//        PendingIntent open6th = PendingIntent.getActivity(context, 0, it6, 0);
-//        views.setOnClickPendingIntent(R.id.sixthWeb, open6th);
+
 
 
         System.out.println("CHECK POINT 6");
         //7th
         Intent it7 = new Intent(context, WebActivity.class);
-//        it7.setData(Uri.parse(Ranking.get(6)));
-//        PendingIntent open7th = PendingIntent.getActivity(context, 0, it7, 0);
-//        views.setOnClickPendingIntent(R.id.seventhWeb, open7th);
 
 
 
         System.out.println("CHECK POINT 7");
         //8th
         Intent it8 = new Intent(context, WebActivity.class);
-//        it8.setData(Uri.parse(Ranking.get(7)));
-//        PendingIntent open8th = PendingIntent.getActivity(context, 0, it8, 0);
-//        views.setOnClickPendingIntent(R.id.eighthWeb, open8th);
+
 
         System.out.println("CHECK POINT 8");
         //9th
         Intent it9 = new Intent(context, WebActivity.class);
-//        it9.setData(Uri.parse(Ranking.get(8)));
-//        PendingIntent open9th = PendingIntent.getActivity(context, 0, it9, 0);
-//        views.setOnClickPendingIntent(R.id.ninethWeb, open9th);
+
 
         System.out.println("CHECK POINT 9");
         //10th
         Intent it10 = new Intent(context, WebActivity.class);
-//        it10.setData(Uri.parse(Ranking.get(9)));
-//        PendingIntent open10th = PendingIntent.getActivity(context, 0, it10, 0);
-//        views.setOnClickPendingIntent(R.id.tenthWeb, open10th);
+
 
         System.out.println("CHECK POINT 10");
 
@@ -237,154 +214,11 @@ public class NewAppWidget extends AppWidgetProvider {
         };
 
         for(int i = 0 ; i < newRanking.size(); i++){
-            System.out.println("=====================================");
-            System.out.println("this is for state : " + i );
-            System.out.println("size of intentArray : " + intentArray.length );
-            System.out.println("size of pendingIntentArray : " + pItArr.length );
-            System.out.println("newRanking.get("+i+") : " + newRanking.size());
-            System.out.println("=====================================");
+
             intentArray[i].setData(Uri.parse(newRanking.get(i)));
             pItArr[i] = PendingIntent.getActivity(context, 0, intentArray[i], 0);
             views.setOnClickPendingIntent(id[i], pItArr[i]);
         }
-
-        //TEXT VIEW - WEB VIEW 연결
-
-
-
-//        //1st
-//        if(newRanking.size()>=1){
-//            Intent it1 = new Intent(context, WebActivity.class);
-//            it1.setData(Uri.parse(Ranking.get(0)));
-//            PendingIntent open1st = PendingIntent.getActivity(context, 0, it1, 0);
-//            views.setOnClickPendingIntent(R.id.firstWeb, open1st);
-//        }
-//
-//
-//        //2nd
-//        Intent it2 = new Intent(context, WebActivity.class);
-//        it2.setData(Uri.parse(Ranking.get(1)));
-//        PendingIntent open2nd = PendingIntent.getActivity(context, 0, it2, 0);
-//        views.setOnClickPendingIntent(R.id.secondWeb, open2nd);
-//
-//        //3rd
-//        Intent it3 = new Intent(context, WebActivity.class);
-//        it3.setData(Uri.parse(Ranking.get(2)));
-//        PendingIntent open3rd = PendingIntent.getActivity(context, 0, it3, 0);
-//        views.setOnClickPendingIntent(R.id.thirdWeb, open3rd);
-//
-//        //4th
-//        Intent it4 = new Intent(context, WebActivity.class);
-//        it4.setData(Uri.parse(Ranking.get(3)));
-//        PendingIntent open4th = PendingIntent.getActivity(context, 0, it4, 0);
-//        views.setOnClickPendingIntent(R.id.fourthWeb, open4th);
-//
-//        //5th
-//        Intent it5 = new Intent(context, WebActivity.class);
-//        it5.setData(Uri.parse(Ranking.get(4)));
-//        PendingIntent open5th = PendingIntent.getActivity(context, 0, it5, 0);
-//        views.setOnClickPendingIntent(R.id.fifthWeb, open5th);
-//
-//        //6th
-//        Intent it6 = new Intent(context, WebActivity.class);
-//        it6.setData(Uri.parse(Ranking.get(5)));
-//        PendingIntent open6th = PendingIntent.getActivity(context, 0, it6, 0);
-//        views.setOnClickPendingIntent(R.id.sixthWeb, open6th);
-//
-//        //7th
-//        Intent it7 = new Intent(context, WebActivity.class);
-//        it7.setData(Uri.parse(Ranking.get(6)));
-//        PendingIntent open7th = PendingIntent.getActivity(context, 0, it7, 0);
-//        views.setOnClickPendingIntent(R.id.seventhWeb, open7th);
-//
-//        //8th
-//        Intent it8 = new Intent(context, WebActivity.class);
-//        it8.setData(Uri.parse(Ranking.get(7)));
-//        PendingIntent open8th = PendingIntent.getActivity(context, 0, it8, 0);
-//        views.setOnClickPendingIntent(R.id.eighthWeb, open8th);
-//
-//
-//        //9th
-//        Intent it9 = new Intent(context, WebActivity.class);
-//        it9.setData(Uri.parse(Ranking.get(8)));
-//        PendingIntent open9th = PendingIntent.getActivity(context, 0, it9, 0);
-//        views.setOnClickPendingIntent(R.id.ninethWeb, open9th);
-//
-//
-//        //10th
-//        Intent it10 = new Intent(context, WebActivity.class);
-//        it10.setData(Uri.parse(Ranking.get(9)));
-//        PendingIntent open10th = PendingIntent.getActivity(context, 0, it10, 0);
-//        views.setOnClickPendingIntent(R.id.tenthWeb, open10th);
-
-
-
-
-
-
-//        //TEXT VIEW - WEB VIEW 연결
-//        //1st
-//        Intent it1 = new Intent(context, WebActivity.class);
-//        it1.setData(Uri.parse(Ranking.get(0)));
-//        PendingIntent open1st = PendingIntent.getActivity(context, 0, it1, 0);
-//        views.setOnClickPendingIntent(R.id.firstWeb, open1st);
-//
-//        //2nd
-//        Intent it2 = new Intent(context, WebActivity.class);
-//        it2.setData(Uri.parse(Ranking.get(1)));
-//        PendingIntent open2nd = PendingIntent.getActivity(context, 0, it2, 0);
-//        views.setOnClickPendingIntent(R.id.secondWeb, open2nd);
-//
-//        //3rd
-//        Intent it3 = new Intent(context, WebActivity.class);
-//        it3.setData(Uri.parse(Ranking.get(2)));
-//        PendingIntent open3rd = PendingIntent.getActivity(context, 0, it3, 0);
-//        views.setOnClickPendingIntent(R.id.thirdWeb, open3rd);
-//
-//        //4th
-//        Intent it4 = new Intent(context, WebActivity.class);
-//        it4.setData(Uri.parse(Ranking.get(3)));
-//        PendingIntent open4th = PendingIntent.getActivity(context, 0, it4, 0);
-//        views.setOnClickPendingIntent(R.id.fourthWeb, open4th);
-//
-//        //5th
-//        Intent it5 = new Intent(context, WebActivity.class);
-//        it5.setData(Uri.parse(Ranking.get(4)));
-//        PendingIntent open5th = PendingIntent.getActivity(context, 0, it5, 0);
-//        views.setOnClickPendingIntent(R.id.fifthWeb, open5th);
-//
-//        //6th
-//        Intent it6 = new Intent(context, WebActivity.class);
-//        it6.setData(Uri.parse(Ranking.get(5)));
-//        PendingIntent open6th = PendingIntent.getActivity(context, 0, it6, 0);
-//        views.setOnClickPendingIntent(R.id.sixthWeb, open6th);
-//
-//        //7th
-//        Intent it7 = new Intent(context, WebActivity.class);
-//        it7.setData(Uri.parse(Ranking.get(6)));
-//        PendingIntent open7th = PendingIntent.getActivity(context, 0, it7, 0);
-//        views.setOnClickPendingIntent(R.id.seventhWeb, open7th);
-//
-//        //8th
-//        Intent it8 = new Intent(context, WebActivity.class);
-//        it8.setData(Uri.parse(Ranking.get(7)));
-//        PendingIntent open8th = PendingIntent.getActivity(context, 0, it8, 0);
-//        views.setOnClickPendingIntent(R.id.eighthWeb, open8th);
-//
-//
-//        //9th
-//        Intent it9 = new Intent(context, WebActivity.class);
-//        it9.setData(Uri.parse(Ranking.get(8)));
-//        PendingIntent open9th = PendingIntent.getActivity(context, 0, it9, 0);
-//        views.setOnClickPendingIntent(R.id.ninethWeb, open9th);
-//
-//
-//        //10th
-//        Intent it10 = new Intent(context, WebActivity.class);
-//        it10.setData(Uri.parse(Ranking.get(9)));
-//        PendingIntent open10th = PendingIntent.getActivity(context, 0, it10, 0);
-//        views.setOnClickPendingIntent(R.id.tenthWeb, open10th);
-
 
 
         //투명도 설정
@@ -412,10 +246,6 @@ public class NewAppWidget extends AppWidgetProvider {
         //반복이 계속 일어나는 이유
         System.out.println("The length of appWidgetIds : " + appWidgetIds.length);
 
-
-        // There may be multiple widgets active, so update all of hem
-
-
     }
 
     @Override
@@ -441,6 +271,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
 
+
         System.out.println("돌아온 리시브의 인텐트 : " + action);
 
 
@@ -451,8 +282,20 @@ public class NewAppWidget extends AppWidgetProvider {
         }
         else if(action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)){
             System.out.println("onReceive의 ACTION_APPWIDGET_UPDATE");
+
             AppWidgetManager manager = AppWidgetManager.getInstance(context);
             this.onUpdate(context, manager, manager.getAppWidgetIds(new ComponentName(context, getClass())));
+        }
+        else if(action.equals("android.appwidget.action.APPWIDGET_REFRESH")){
+            
+            System.out.println("onReceive의 ACTION_APPWIDGET_REFRESH");
+            RemoteViews rView = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+            rView.setViewVisibility(R.id.getAPIprogress, View.VISIBLE);
+            rView.setViewVisibility(R.id.ranking, View.INVISIBLE);
+
+            AppWidgetManager manager = AppWidgetManager.getInstance(context);
+            this.onUpdate(context, manager, manager.getAppWidgetIds(new ComponentName(context, getClass())));
+
         }
         super.onReceive(context,intent);
 
@@ -480,9 +323,6 @@ public class NewAppWidget extends AppWidgetProvider {
 
             super.onPreExecute();
 
-            //**
-            rViews.setViewVisibility(R.id.getAPIprogress, View.VISIBLE);
-            rViews.setViewVisibility(R.id.ranking, View.INVISIBLE);
 
 
 
