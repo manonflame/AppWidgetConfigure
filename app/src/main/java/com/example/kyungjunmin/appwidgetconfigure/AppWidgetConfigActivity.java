@@ -57,23 +57,6 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
 
 
 
-    //API
-    //String TMONAPI = "https://api-qa.ticketmonster.co.kr/v2/widget/cards";
-    String TMONAPI = "https://raw.githubusercontent.com/ChoiJinYoung/iphonewithswift2/master/weather.json";
-
-    //URL 인스턴스 생성
-    URL url = null;
-
-    HttpURLConnection conn = null;
-
-    BufferedReader Res = null;
-
-    JSONObject jObj = null;
-
-    JSONArray user = null;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,13 +77,11 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
         //텍스트뷰를 연결
         mTxt = (TextView)findViewById(R.id.SeekBarText);
 
-
         //싴바 연결
         mSeek = (SeekBar) findViewById(R.id.configSeekBar);
 
-
-
-        sampleAlpha =  (LinearLayout) findViewById(R.id.sampleAlpha);
+        //컨피그에서 보여 줄 화면의 투명도
+       sampleAlpha =  (LinearLayout) findViewById(R.id.sampleAlpha);
 
         //시크바 초기값 꺼내오기
         initAlpha = PreferenceManager.getDefaultSharedPreferences(this).getInt("degreeOfTransparency", 0);
@@ -120,11 +101,8 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
                 int xPos = (mSeek.getWidth() - padding)*initAlpha/mSeek.getMax() + sPos - (mTxt.getWidth()/2);
                 int width = mSeek.getWidth();
                 int max = mSeek.getMax();
-                System.out.println("asdf : " + initAlpha);
-                System.out.println("asdf : " + mSeek.getWidth());
-                System.out.println("asdf : " + padding);
-                System.out.println("asdf : " + mSeek.getMax());
-                System.out.println("asdf : " + mSeek.getWidth()/2);
+
+                System.out.println("asdf");
 
                 mTxt.setX(xPos);
             }
@@ -161,29 +139,19 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
 
                 int alpha = progress;
                 mTxt.setText(convertedText);
-
                 int padding = seekBar.getPaddingLeft() + seekBar.getPaddingRight();
                 int sPos = seekBar.getLeft() + seekBar.getPaddingLeft();
                 int xPos = (seekBar.getWidth() - padding)*seekBar.getProgress()/seekBar.getMax() + sPos - (mTxt.getWidth()/2);
-                System.out.println("zxcv : " + seekBar.getProgress());
-                System.out.println("zxcv : " + seekBar.getWidth());
-                System.out.println("zxcv : " + padding);
-                System.out.println("zxcv : " + seekBar.getMax());
-                System.out.println("zxcv : " + seekBar.getWidth()/2);
-
                 mTxt.setX(xPos);
-
                 sampleAlpha.setBackgroundColor(Color.argb(alpha*2, 255, 255, 255));
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
@@ -200,30 +168,11 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
         else if(view.getId() == R.id.confirm){
 
 
-            System.out.println("확인 버튼이 눌렸다");
-
-
-
-
 
             //시크바의 값을 SharedPreferences에 저장
             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
             editor.putInt("degreeOfTransparency", mSeek.getProgress());
             editor.apply();
-            //시크바 저장 제대로 됐는지 함 봅시다.
-            int test = PreferenceManager.getDefaultSharedPreferences(this).getInt("degreeOfTransparency", 0);
-
-            //시크바에서 받은 값
-            System.out.println("SP to input : " + mSeek.getProgress());
-            //저장된 값
-            System.out.println("SP inputed : " + test);
-
-
-
-
-
-
-
 
 
             Intent intent = new Intent(AppWidgetConfigActivity.this, NewAppWidget.class);
@@ -232,19 +181,12 @@ public class AppWidgetConfigActivity extends AppCompatActivity implements View.O
 
 
             Intent resultValue = new Intent();
-            System.out.println("확인 버튼이 눌렸다2");
             resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppwidgetId);
-            System.out.println("확인 버튼이 눌렸다3");
             setResult(RESULT_OK, resultValue);
-            System.out.println("확인 버튼이 눌렸다4");
-
-
-
 
 
         }
 
-        System.out.println("확인 or 취소 마지막 처리 확인");
         finish();
     }
 
