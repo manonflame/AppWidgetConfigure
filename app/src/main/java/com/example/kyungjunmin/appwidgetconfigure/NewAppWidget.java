@@ -36,64 +36,48 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class NewAppWidget extends AppWidgetProvider {
 
-    static ArrayList<String> Ranking = new ArrayList<String>(){
-        {
-            add("1");
-            add("2");
-            add("3");
-            add("4");
-            add("5");
-
-            add("6");
-            add("7");
-            add("8");
-            add("9");
-            add("10");
-
-        }
-    };
-
+    //API로부터 받은 검색어 타이틀을 저장
     ArrayList<String> newRanking;
 
 
     //API
     String TMONAPI = "https://api-qa.ticketmonster.co.kr/v2/widget/cards";
-   // String TMONAPI = "https://raw.githubusercontent.com/ChoiJinYoung/iphonewithswift2/master/weather.json";
 
-    //URL 인스턴스 생성
+
+    //API관련 인스턴스 생성
     URL url = null;
-
     HttpsURLConnection conn = null;
-
     BufferedReader Res = null;
-
     JSONObject jObj = null;
-
     APITaker apiTaker = null;
 
 
-    //10개의 검색어 키워드를 받을 ArrayList<String>
 
 
-
-    Context context;
     private String strOPEN_CONFIG = "android.action.OPEN_CONFIG";
 
 
+    //초기 리모트뷰를 보여주기 위한 메서드
+    void initUpdateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                             int appWidgetId) {
 
+        System.out.println("initUpdateAppWidget()");
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+        views.setViewVisibility(R.id.getAPIprogress, View.VISIBLE);
+        views.setViewVisibility(R.id.ranking, View.GONE);
 
+        appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
 
+    //파싱 후의 리모트 뷰를 보여주기 위한 메서드
     void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-
         System.out.println("updateAppWidget()");
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
-        //ASDF
+        //리모트뷰 객체 생성 및 비저빌러티 변경
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
         views.setViewVisibility(R.id.getAPIprogress, View.GONE);
         views.setViewVisibility(R.id.ranking, View.VISIBLE);
-
 
 
         //리프레시 이벤트
@@ -102,99 +86,31 @@ public class NewAppWidget extends AppWidgetProvider {
         views.setOnClickPendingIntent(R.id.refresh, pRefresh);
 
 
-
-
         //버튼에 이벤트 부여
-
         Intent it = new Intent(context, AppWidgetConfigActivity.class);
-
         PendingIntent openConfig = PendingIntent.getActivity(context, 0, it, 0);
         views.setOnClickPendingIntent(R.id.configure, openConfig);
 
-
-
-
         int id[] = {R.id.firstWeb, R.id.secondWeb, R.id.thirdWeb, R.id.fourthWeb, R.id.fifthWeb, R.id.sixthWeb, R.id.seventhWeb, R.id.eighthWeb, R.id.ninethWeb, R.id.tenthWeb};
 
-
-        System.out.println("after Config intent");
-
-
         for(int i = 0 ; i < newRanking.size() ; i++){
-            System.out.println("LET'S CHECK OUT NEWRANKINGSIZE : " + i + "then Ranking : " + newRanking.get(i));
             views.setTextViewText(id[i], newRanking.get(i));
-
         }
         for(int i = newRanking.size() ; i < 10 ; i++ ){
             views.setTextViewText(id[i], " ");
         }
 
-
-        System.out.println("after setTextViewText");
-
-
-
-
-        //1st
         Intent it1 = new Intent(context, WebActivity.class);
-
-
-        //2nd
         Intent it2 = new Intent(context, WebActivity.class);
-
-
-        //3rd
         Intent it3 = new Intent(context, WebActivity.class);
-
-
-
-        System.out.println("CHECK POINT 3");
-
-        //4th
         Intent it4 = new Intent(context, WebActivity.class);
-
-
-        System.out.println("CHECK POINT 4");
-
-        //5th
         Intent it5 = new Intent(context, WebActivity.class);
-
-
-        System.out.println("CHECK POINT 5");
-        //6th
         Intent it6 = new Intent(context, WebActivity.class);
-
-
-
-        System.out.println("CHECK POINT 6");
-        //7th
         Intent it7 = new Intent(context, WebActivity.class);
-
-
-
-        System.out.println("CHECK POINT 7");
-        //8th
         Intent it8 = new Intent(context, WebActivity.class);
-
-
-        System.out.println("CHECK POINT 8");
-        //9th
         Intent it9 = new Intent(context, WebActivity.class);
-
-
-        System.out.println("CHECK POINT 9");
-        //10th
         Intent it10 = new Intent(context, WebActivity.class);
-
-
-        System.out.println("CHECK POINT 10");
-
-
-
-
-        Intent intentArray[] = {
-                it1, it2, it3, it4, it5, it6, it7, it8, it9, it10
-        };
+        Intent intentArray[] = { it1, it2, it3, it4, it5, it6, it7, it8, it9, it10 };
 
         PendingIntent pit1 = null;
         PendingIntent pit2 = null;
@@ -206,12 +122,7 @@ public class NewAppWidget extends AppWidgetProvider {
         PendingIntent pit8 = null;
         PendingIntent pit9 = null;
         PendingIntent pit10 = null;
-
-
-
-        PendingIntent pItArr[] = {
-                pit1, pit2, pit3, pit4, pit5, pit6, pit7, pit8, pit9, pit10
-        };
+        PendingIntent pItArr[] = { pit1, pit2, pit3, pit4, pit5, pit6, pit7, pit8, pit9, pit10 };
 
         for(int i = 0 ; i < newRanking.size(); i++){
 
@@ -224,7 +135,7 @@ public class NewAppWidget extends AppWidgetProvider {
         //투명도 설정
         //싴바 프레퍼런시스에서 데이터 가져오고
         int alpha = PreferenceManager.getDefaultSharedPreferences(context).getInt("degreeOfTransparency", 0);
-        System.out.println("SeekValue received : " + alpha);
+
         //투명도 설정
         views.setInt(R.id.appWidget, "setBackgroundColor", Color.argb(alpha*2,225,225,225));
 
@@ -233,26 +144,33 @@ public class NewAppWidget extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
+
     @Override
+    //초기 및
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         System.out.println("onUpdate()");
 
-        this.context = context;
+
+        apiTaker = new APITaker(appWidgetManager, appWidgetIds, context);
+        RemoteViews rView = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+        rView.setViewVisibility(R.id.getAPIprogress, View.VISIBLE);
+        rView.setViewVisibility(R.id.ranking, View.INVISIBLE);
+
+        //API 수신 이전에 초기 화면을 보여줌
+        for (int appWidgetId : appWidgetIds) {
+            System.out.println("for state in initOnUpdate() +" + appWidgetId );
+            initUpdateAppWidget(context, appWidgetManager, appWidgetId);
+        }
 
 
-        apiTaker = new APITaker(appWidgetManager, appWidgetIds);
+        //API 수신 수행
+        System.out.println("execute()");
         apiTaker.execute();
-        //반복이 계속 일어나는 이유
-        System.out.println("The length of appWidgetIds : " + appWidgetIds.length);
 
     }
 
-    @Override
-    public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
-        System.out.println("onEnabled()");
-    }
+
 
     @Override
     public void onDisabled(Context context) {
@@ -264,14 +182,9 @@ public class NewAppWidget extends AppWidgetProvider {
 
 
 
+
         System.out.println("onReceived()");
         String action = intent.getAction();
-
-
-
-
-
-
         System.out.println("돌아온 리시브의 인텐트 : " + action);
 
 
@@ -280,14 +193,16 @@ public class NewAppWidget extends AppWidgetProvider {
         if(action.equals(strOPEN_CONFIG)){
             System.out.println("pendingIntent open CONFIG ACTIVTTY()");
         }
-        else if(action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)){
-            System.out.println("onReceive의 ACTION_APPWIDGET_UPDATE");
+        else if(action.equals(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE)){
+            System.out.println("onReceive의 ACTION_APPWIDGET_CONFIGURE");
 
             AppWidgetManager manager = AppWidgetManager.getInstance(context);
+
+            System.out.println("리시브가부르는 컨피겨의 확인 버튼으로 인해 업데이트 ");
             this.onUpdate(context, manager, manager.getAppWidgetIds(new ComponentName(context, getClass())));
         }
         else if(action.equals("android.appwidget.action.APPWIDGET_REFRESH")){
-            
+
             System.out.println("onReceive의 ACTION_APPWIDGET_REFRESH");
             RemoteViews rView = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
             rView.setViewVisibility(R.id.getAPIprogress, View.VISIBLE);
@@ -296,6 +211,10 @@ public class NewAppWidget extends AppWidgetProvider {
             AppWidgetManager manager = AppWidgetManager.getInstance(context);
             this.onUpdate(context, manager, manager.getAppWidgetIds(new ComponentName(context, getClass())));
 
+        }
+        else if(action.equals("android.appwidget.action.APPWIDGET_UPDATE")){
+            System.out.println("do nothing");
+            return;
         }
         super.onReceive(context,intent);
 
@@ -306,89 +225,60 @@ public class NewAppWidget extends AppWidgetProvider {
 
         AppWidgetManager appWidgetManager;
         int[] appWidgetIds;
-
-        //**이거 되는지 확인
-        RemoteViews rViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+        Context context;
 
 
-        public APITaker(AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        public APITaker(AppWidgetManager appWidgetManager, int[] appWidgetIds, Context context) {
             this.appWidgetManager = appWidgetManager;
             this.appWidgetIds = appWidgetIds;
+            this.context = context;
         }
 
-        //API 받기 전에 progressBar처리
+
         @Override
         protected void onPreExecute(){
-
-
             super.onPreExecute();
-
-
-
 
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
 
-
-            newRanking = new ArrayList<String>();
-
+            newRanking = new ArrayList<>();
             System.out.println("doInBackground()");
 
-            StringBuilder json = null;
-
-            String line = null;
-
-            String rJson = null;
+            StringBuilder json;
+            String line;
+            String rJson;
 
             json = new StringBuilder();
+
             try{
-
-                System.out.println("doInBackground() :: try() ");
-
+                System.out.println("APITaker start to take api");
                 url = new URL(TMONAPI);
                 conn=(HttpsURLConnection) url.openConnection();
 
-
-
-                System.out.println("doInBackground() :: after openConnection() ");
-
-
-                Log.e("code",conn.getResponseCode()+"");
-
-                System.out.println("after conn.getInputStream() ");
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
-                    System.out.println("성공");
                 }
                 else{
-                    System.out.println("실패");
                 }
-                System.out.println(" Before access to conn ");
                 Res = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 
-                System.out.println("doInBackground() :: after BufferedReader construct() ");
                 while((line = Res.readLine())!=null){
                     json.append(line);
                 }
-                System.out.println("doInBackground() :: after readLine() ");
                 conn.disconnect();
 
 
 
             } catch (MalformedURLException e) {
-                System.out.println("doInBackground() :: MalformedURLException  ");
                 e.printStackTrace();
             } catch (IOException e) {
-                System.out.println("doInBackground() :: IOException ");
                 e.printStackTrace();
             }
 
             rJson = json.toString();
             System.out.println(" The Result of PARSING : " + rJson);
-
-
-
 
             try{
                 jObj = new JSONObject(rJson);
@@ -400,11 +290,7 @@ public class NewAppWidget extends AppWidgetProvider {
                 for(int i = 0 ; i < jArr.length() ; i++){
                     jObj = jArr.getJSONObject(i);
                     String title = jObj.getString("title");
-
-                    Ranking.set(i,title);
                     newRanking.add(i,title);
-                    System.out.println("title renew : " + Ranking.get(i));
-
                 }
 
 
@@ -413,13 +299,7 @@ public class NewAppWidget extends AppWidgetProvider {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-
-
-
-
-
+            System.out.println("APITaker finished taking api");
 
             return null;
         }
@@ -427,12 +307,17 @@ public class NewAppWidget extends AppWidgetProvider {
         @Override
         protected void onPostExecute(Void v){
             super.onPostExecute(v);
+            System.out.println("onPostExecute");
+
+
 
             for (int appWidgetId : appWidgetIds) {
 
                 System.out.println("for state in onUpdate()");
                 updateAppWidget(context, appWidgetManager, appWidgetId);
             }
+
+
 
 
         }

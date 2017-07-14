@@ -27,26 +27,18 @@ public class WebActivity extends AppCompatActivity {
     String word;
     String daumURL = "https://m.search.daum.net/search?w=tot&nil_mtopsearch=btn&DA=YZR&q=";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //타이틀을 없앰
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_web);
 
-
-
-
-
-        //인텐트와 문자열 받음
+        //페이지가 로딩되는 동안 돌아갈 프로그레스바를 받
         progressBar = (ProgressBar)this.findViewById(R.id.ProgressBar);
-
-
         Uri data =getIntent().getData();
         word = data.toString();
-
         System.out.println("what does WEB ACTIVITY take??? " + word);
 
         //웹뷰 연결
@@ -54,7 +46,6 @@ public class WebActivity extends AppCompatActivity {
 
         //웹뷰 기본 설정
         mWebView.canGoBack();
-        mWebView.reload();
         mWebView.setWebViewClient(new WebViewClient(){
             public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon){
                 super.onPageStarted(view, url, favicon);
@@ -64,16 +55,12 @@ public class WebActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
             }
-
         });
 
         mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);
         mWebSettings.setSupportMultipleWindows(false);
-
         mWebView.loadUrl(daumURL + word);
-
-
     }
 
 

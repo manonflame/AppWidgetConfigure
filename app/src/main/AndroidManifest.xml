@@ -27,6 +27,7 @@
         <receiver android:name=".NewAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.ACTION_APPWIDGET_CONFIGURE" />
                 <action android:name="android.action.OPEN_CONFIG" />
                 <action android:name="android.appwidget.action.APPWIDGET_REFRESH"/>
             </intent-filter>
